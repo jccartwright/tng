@@ -1,9 +1,9 @@
-import FooterViewModel from "../../../../../src/app/widgets/Footer/FooterViewModel";
+import FooterViewModel from "../../../../src/widgets/Footer/FooterViewModel";
 
 const { beforeEach, suite, test } = intern.getInterface("tdd");
 const { assert } = intern.getPlugin("chai");
 
-suite("app/widgets/Footer/FooterViewModel", () => {
+suite("widgets/Footer/FooterViewModel", () => {
   let vm: FooterViewModel;
 
   beforeEach(() => {

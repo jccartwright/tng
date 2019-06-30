@@ -29,7 +29,7 @@ export default class Footer extends declared(Widget) {
   render() {
     return (
       <div class={CSS.base}>
-        <p>Welcome {this.name}!</p>
+        <p>FOOTER</p>
       </div>
     );
   }
