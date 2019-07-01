@@ -16,6 +16,7 @@ import Widget from "esri/widgets/Widget";
 import AppViewModel, { AppParams } from "./App/AppViewModel";
 import Footer from "./Footer";
 import { Header } from "./Header";
+import Sidebar from "./Sidebar";
 
 interface AppViewParams extends AppParams, esri.WidgetProperties {}
 
@@ -44,6 +45,7 @@ export default class App extends declared(Widget) {
     return (
       <div class={CSS.base}>
         {Header({ appName: this.appName })}
+        {new Sidebar().render()}
         <div class={CSS.webmap} bind={this} afterCreate={this.onAfterCreate} />
         {new Footer().render()}
       </div>
