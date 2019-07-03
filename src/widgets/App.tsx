@@ -37,22 +37,27 @@ export default class App extends declared(Widget) {
 
   @aliasOf("viewModel.view") view: MapView;
 
+  sidebar: Sidebar = new Sidebar();
+  footer: Footer = new Footer();
+
   constructor(params: Partial<AppViewParams>) {
     super(params);
   }
 
   render() {
+    console.log('inside App#render...');
     return (
       <div class={CSS.base}>
         {Header({ appName: this.appName })}
-        {new Sidebar().render()}
+        {this.sidebar.render()}
         <div class={CSS.webmap} bind={this} afterCreate={this.onAfterCreate} />
-        {new Footer().render()}
+        {this.footer.render()}
       </div>
     );
   }
 
   private onAfterCreate(element: HTMLDivElement) {
+    console.log('inside App#onAfterCreate...');
     import("./../data/app").then(({ featureLayer, map }) => {
       this.featureLayer = featureLayer;
       this.map = map;
@@ -60,6 +65,9 @@ export default class App extends declared(Widget) {
         map: this.map,
         container: element
       });
+      // TODO: better to set as property or pass in constructor?
+      console.log('setting MapView...');
+      this.sidebar.view = this.view;
     });
   }
 }
