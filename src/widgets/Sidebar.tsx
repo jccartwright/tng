@@ -12,10 +12,9 @@ import MapView from "esri/views/MapView";
 import Widget from "esri/widgets/Widget";
 
 import SidebarViewModel, { SidebarParams } from "./Sidebar/SidebarViewModel";
-import ZoomButton from './ZoomButton';
+import ZoomButton from "./ZoomButton";
 
-
-//interface SidebarViewParams extends SidebarParams, esri.WidgetProperties{}
+// interface SidebarViewParams extends SidebarParams, esri.WidgetProperties{}
 
 const CSS = {
   base: "esri-widget sidebar-base"
@@ -36,18 +35,18 @@ export default class Sidebar extends declared(Widget) {
   @renderable()
   viewModel: SidebarViewModel = new SidebarViewModel();
 
-  private zoomButton: ZoomButton
+  private zoomButton: ZoomButton;
 
   constructor() {
     super();
-    console.log('inside Sidebar#constructor');
+    console.log("inside Sidebar#constructor");
     this.zoomButton = new ZoomButton();
   }
 
-  set view(view:MapView) {
-    console.log('inside Sidebar#view...');
+  set view(view: MapView) {
+    console.log("inside Sidebar#view...");
     // TODO: setting the value of the alias doesn't propogate to the VM?
-    //this._view = view;
+    // this._view = view;
     this.viewModel._view = view;
     console.log(this._view);
     console.log(this.viewModel._view);
@@ -55,18 +54,19 @@ export default class Sidebar extends declared(Widget) {
   }
 
   render() {
-    console.log('inside Sidebar#render...');
+    console.log("inside Sidebar#render...");
     console.log(this.viewModel._view);
     return (
       <div class={CSS.base}>
         <p>SIDEBAR</p>
         {this.zoomButton.render()}
         <button
-            bind={this}
-            type="button"
-            onclick={this.viewModel.buttonClickHandler}>
-              Click Me2
-          </button>
+          bind={this}
+          type="button"
+          onclick={this.viewModel.buttonClickHandler}
+        >
+          Click Me2
+        </button>
       </div>
     );
   }
