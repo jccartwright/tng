@@ -23,7 +23,12 @@ export default class SidebarViewModel extends declared(Accessor) {
     console.log('inside SidebarViewModel#constructor...');
   }
 
-  buttonClickHandler() {
-    console.log('Sidebar:',this._view);
+  testme() {
+    console.log('testme');
   }
+
+  buttonClickHandler = () => {
+    console.log('SidebarViewModel#buttonClickHandler');
+    this.testme();
+  };
 }

@@ -8,11 +8,11 @@ import {
 } from "esri/core/accessorSupport/decorators";
 import { renderable, tsx } from "esri/widgets/support/widget";
 
+import MapView from "esri/views/MapView";
 import Widget from "esri/widgets/Widget";
 
 import SidebarViewModel, { SidebarParams } from "./Sidebar/SidebarViewModel";
 import ZoomButton from './ZoomButton';
-import MapView from "esri/views/MapView";
 
 
 //interface SidebarViewParams extends SidebarParams, esri.WidgetProperties{}
