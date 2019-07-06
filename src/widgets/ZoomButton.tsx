@@ -4,10 +4,10 @@ import {
   property,
   subclass
 } from "esri/core/accessorSupport/decorators";
-import { renderable, tsx } from "esri/widgets/support/widget";
-
-import Widget from "esri/widgets/Widget";
 import MapView from "esri/views/MapView";
+import { renderable, tsx } from "esri/widgets/support/widget";
+import Widget from "esri/widgets/Widget";
+
 import ZoomButtonViewModel from "./ZoomButton/ZoomButtonViewModel";
 
 
@@ -22,12 +22,10 @@ export default class ZoomButton extends declared(Widget) {
   @renderable()
   locationString = "";
 
-  @aliasOf("viewModel.view")
+  @property({ type: MapView })
   view: MapView;
 
-  @property({
-    type: ZoomButtonViewModel
-  })
+  @property({ type: ZoomButtonViewModel})
   @renderable()
   viewModel: ZoomButtonViewModel = new ZoomButtonViewModel();
 
@@ -36,13 +34,17 @@ export default class ZoomButton extends declared(Widget) {
     console.log('inside ZoomButton#constructor...');
   }
 
+  buttonClickHandler = () => {
+    const coords: number[] = this.viewModel.parseCoordinateString();
+    this.viewModel.panToLocation(this.view, coords);
+  };
+
   render() {
     return (
       <div class={CSS.base}>
         <button
-            bind={this}
             type="button"
-            onclick={this.viewModel.buttonClickHandler}>
+            onclick={this.buttonClickHandler}>
               Click Me
           </button>
       </div>
