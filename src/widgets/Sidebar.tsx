@@ -6,15 +6,12 @@ import {
   property,
   subclass
 } from "esri/core/accessorSupport/decorators";
-import { renderable, tsx } from "esri/widgets/support/widget";
-
 import MapView from "esri/views/MapView";
+import { renderable, tsx } from "esri/widgets/support/widget";
 import Widget from "esri/widgets/Widget";
 
-import SidebarViewModel, { SidebarParams } from "./Sidebar/SidebarViewModel";
+import SidebarViewModel from "./Sidebar/SidebarViewModel";
 import ZoomButton from "./ZoomButton";
-
-// interface SidebarViewParams extends SidebarParams, esri.WidgetProperties{}
 
 const CSS = {
   base: "esri-widget sidebar-base"
@@ -26,36 +23,27 @@ export default class Sidebar extends declared(Widget) {
   @renderable()
   name = "";
 
-  @aliasOf("viewModel._view")
-  _view: MapView;
+  // TODO: vs. just @property()?
+  @property({ type: MapView })
+  view: MapView;
 
-  @property({
-    type: SidebarViewModel
-  })
+  @property({ type: SidebarViewModel })
   @renderable()
-  viewModel: SidebarViewModel = new SidebarViewModel();
+  private viewModel: SidebarViewModel = new SidebarViewModel();
 
-  private zoomButton: ZoomButton;
+  // ZoomButton does not yet have all the properties required to handle UI interactions
+  private zoomButton: ZoomButton = new ZoomButton();
 
   constructor() {
     super();
-    console.log("inside Sidebar#constructor");
-    this.zoomButton = new ZoomButton();
-  }
 
-  set view(view: MapView) {
-    console.log("inside Sidebar#view...");
-    // TODO: setting the value of the alias doesn't propogate to the VM?
-    // this._view = view;
-    this.viewModel._view = view;
-    console.log(this._view);
-    console.log(this.viewModel._view);
-    this.zoomButton.view = view;
+    // TODO: hang on to handle and unwatch after being set?
+    this.watch("view", mapView => {
+      this.zoomButton.view = mapView;
+    });
   }
 
   render() {
-    console.log("inside Sidebar#render...");
-    console.log(this.viewModel._view);
     return (
       <div class={CSS.base}>
         <p>SIDEBAR</p>

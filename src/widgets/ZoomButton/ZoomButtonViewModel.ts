@@ -13,20 +13,17 @@ export default class ZoomButtonViewModel extends declared(Accessor) {
 
   constructor(params?: any) {
     super();
-    console.log("inside ZoomButtonViewModel#constructor...");
   }
 
   parseCoordinateString(): number[] {
     const coordArray = this.locationString.split(",");
     const x = parseFloat(coordArray[0]);
     const y = parseFloat(coordArray[1]);
-    return([x,y]);
+    return [x, y];
   }
 
   panToLocation(mapView: MapView, coordinates: number[]) {
     // mapView.goTo(coordinates);
-    mapView.goTo({center: coordinates, zoom: 8});
+    mapView.goTo({ center: coordinates, zoom: 8 });
   }
-
-  
 }

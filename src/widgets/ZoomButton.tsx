@@ -10,14 +10,12 @@ import Widget from "esri/widgets/Widget";
 
 import ZoomButtonViewModel from "./ZoomButton/ZoomButtonViewModel";
 
-
 const CSS = {
   base: "esri-widget zoombutton-base"
 };
 
 @subclass("app.widgets.ZoomButton")
 export default class ZoomButton extends declared(Widget) {
-
   @aliasOf("viewModel.locationString")
   @renderable()
   locationString = "";
@@ -25,13 +23,12 @@ export default class ZoomButton extends declared(Widget) {
   @property({ type: MapView })
   view: MapView;
 
-  @property({ type: ZoomButtonViewModel})
+  @property({ type: ZoomButtonViewModel })
   @renderable()
   viewModel: ZoomButtonViewModel = new ZoomButtonViewModel();
 
   constructor() {
     super();
-    console.log('inside ZoomButton#constructor...');
   }
 
   buttonClickHandler = () => {
@@ -42,13 +39,10 @@ export default class ZoomButton extends declared(Widget) {
   render() {
     return (
       <div class={CSS.base}>
-        <button
-            type="button"
-            onclick={this.buttonClickHandler}>
-              Click Me
-          </button>
+        <button type="button" onclick={this.buttonClickHandler}>
+          Click Me
+        </button>
       </div>
     );
   }
-
 }

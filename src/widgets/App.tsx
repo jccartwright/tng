@@ -45,7 +45,6 @@ export default class App extends declared(Widget) {
   }
 
   render() {
-    console.log('inside App#render...');
     return (
       <div class={CSS.base}>
         {Header({ appName: this.appName })}
@@ -57,7 +56,6 @@ export default class App extends declared(Widget) {
   }
 
   private onAfterCreate(element: HTMLDivElement) {
-    console.log('inside App#onAfterCreate...');
     import("./../data/app").then(({ featureLayer, map }) => {
       this.featureLayer = featureLayer;
       this.map = map;
@@ -66,7 +64,6 @@ export default class App extends declared(Widget) {
         container: element
       });
       // TODO: better to set as property or pass in constructor?
-      console.log('setting MapView...');
       this.sidebar.view = this.view;
     });
   }
