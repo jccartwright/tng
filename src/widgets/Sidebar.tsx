@@ -48,13 +48,30 @@ export default class Sidebar extends declared(Widget) {
       <div class={CSS.base}>
         <p>SIDEBAR</p>
         {this.zoomButton.render()}
-        <button
-          bind={this}
-          type="button"
-          onclick={this.viewModel.buttonClickHandler}
-        >
-          Click Me2
-        </button>
+
+        <p>
+          <button
+            class="btn btn-primary"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapseExample"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            Show Tools
+          </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            <button
+              bind={this}
+              type="button"
+              onclick={this.viewModel.buttonClickHandler}
+            >
+              Click Me2
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
