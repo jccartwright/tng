@@ -3,6 +3,8 @@ import TileLayer from "esri/layers/TileLayer";
 import VectorTileLayer from "esri/layers/VectorTileLayer";
 import ArcGISMap from "esri/Map";
 
+// debugger;
+
 export const featureLayer = new FeatureLayer({
   portalItem: {
     id: "b234a118ab6b4c91908a1cf677941702"

@@ -15,6 +15,9 @@ module.exports = function(_, arg) {
     entry: {
       index: ["./src/css/main.scss", "./src/index.ts"]
     },
+    
+    devtool: "inline-source-map",
+
     output: {
       filename: "[name].[chunkhash].js",
       publicPath: ""
@@ -24,7 +27,7 @@ module.exports = function(_, arg) {
         new TerserPlugin({
           cache: true,
           parallel: true,
-          sourceMap: false,
+          sourceMap: true,
           terserOptions: {
             output: {
               comments: false

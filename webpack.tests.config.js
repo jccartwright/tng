@@ -8,6 +8,7 @@ module.exports = {
     init: "./src/index.ts",
     tests: "./tests/unit/all.ts"
   },
+  // watch: true,
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "./~tmp")

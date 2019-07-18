@@ -15,7 +15,7 @@ suite("widgets/App/AppViewModel", () => {
   });
 
   test("application values valid", () => {
-    const NAME = "My Application";
+    const NAME = "My Application!";
     const featureLayer = new FeatureLayer();
     const map = new EsriMap();
     const view = new MapView();

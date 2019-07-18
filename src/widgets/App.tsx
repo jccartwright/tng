@@ -49,6 +49,7 @@ export default class App extends declared(Widget) {
       <div class={CSS.base}>
         {Header({ appName: this.appName })}
         {this.sidebar.render()}
+        {/* <div class={CSS.webmap}>MAP</div> */}
         <div class={CSS.webmap} bind={this} afterCreate={this.onAfterCreate} />
         {this.footer.render()}
       </div>
