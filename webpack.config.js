@@ -15,7 +15,7 @@ module.exports = function(_, arg) {
     entry: {
       index: ["./src/css/main.scss", "./src/index.ts"]
     },
-    
+
     devtool: "inline-source-map",
 
     output: {

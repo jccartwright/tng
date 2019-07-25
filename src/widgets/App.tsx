@@ -49,7 +49,6 @@ export default class App extends declared(Widget) {
       <div class={CSS.base}>
         {Header({ appName: this.appName })}
         {this.sidebar.render()}
-        {/* <div class={CSS.webmap}>MAP</div> */}
         <div class={CSS.webmap} bind={this} afterCreate={this.onAfterCreate} />
         {this.footer.render()}
       </div>
@@ -57,13 +56,16 @@ export default class App extends declared(Widget) {
   }
 
   private onAfterCreate(element: HTMLDivElement) {
-    import("./../data/app").then(({ featureLayer, map }) => {
+    import("./../data/app").then(({ featureLayer, map, appProperties }) => {
+      
       this.featureLayer = featureLayer;
       this.map = map;
       this.view = new MapView({
         map: this.map,
         container: element
       });
+      this.appName = appProperties.appName;
+
       // TODO: better to set as property or pass in constructor?
       this.sidebar.view = this.view;
     });

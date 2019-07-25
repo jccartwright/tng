@@ -39,6 +39,7 @@ header.top-nav {
   font-weight: 400;
   font-style: normal;
   border-bottom: 1px solid $gray;
+  grid-area: header;
 }
 
 @media (max-width: 600px) {
