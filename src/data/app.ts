@@ -6,7 +6,7 @@ import ArcGISMap from "esri/Map";
 // debugger;
 export const appProperties = {
   appName: "NCEI Template App"
-}
+};
 
 export const featureLayer = new FeatureLayer({
   portalItem: {
