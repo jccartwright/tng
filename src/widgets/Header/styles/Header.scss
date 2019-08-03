@@ -1,0 +1,23 @@
+.top-nav {
+    z-index: 1;
+    background-color: $ncei_background_color;
+    width: 100%;
+    position: relative;
+    font-weight: 400;
+    font-style: normal;
+    border-bottom: 1px solid $gray;
+    grid-area: header;
+  }
+    
+  .top-nav-title {
+    // float: left;
+    // margin-right: 1.5rem;
+    // padding-top: 1.125rem;
+    // padding-bottom: 1.25rem;
+    // line-height: 1.5rem;
+    // margin-left: 1rem;
+    font-size:20px;
+    color:$white;
+  }
+  
+  

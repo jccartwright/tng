@@ -37,6 +37,8 @@ export default class App extends declared(Widget) {
 
   @aliasOf("viewModel.view") view: MapView;
 
+  appVersion: string;
+
   sidebar: Sidebar = new Sidebar();
   footer: Footer = new Footer();
 
@@ -47,7 +49,7 @@ export default class App extends declared(Widget) {
   render() {
     return (
       <div class={CSS.base}>
-        {Header({ appName: this.appName })}
+        {Header({ appName: this.appName, appVersion: this.appVersion })}
         {this.sidebar.render()}
         <div class={CSS.webmap} bind={this} afterCreate={this.onAfterCreate} />
         {this.footer.render()}
@@ -56,6 +58,12 @@ export default class App extends declared(Widget) {
   }
 
   private onAfterCreate(element: HTMLDivElement) {
+    // will this work in a production build? i.e. is package.json included?
+    import("./../../package.json").then(data => {
+      this.appVersion = data.version;
+      console.log(data);
+    });
+
     import("./../data/app").then(({ featureLayer, map, appProperties }) => {
       this.featureLayer = featureLayer;
       this.map = map;
