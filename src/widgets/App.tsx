@@ -58,11 +58,10 @@ export default class App extends declared(Widget) {
   }
 
   private onAfterCreate(element: HTMLDivElement) {
-    // will this work in a production build? i.e. is package.json included?
-    import("./../../package.json").then(data => {
-      this.appVersion = data.version;
-      console.log(data);
-    });
+    // variable set in webpack config
+    this.appVersion = VERSION;
+
+    console.log(`Running App version ${this.appVersion}`);
 
     import("./../data/app").then(({ featureLayer, map, appProperties }) => {
       this.featureLayer = featureLayer;

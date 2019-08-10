@@ -9,6 +9,7 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
 const WorkboxPlugin = require("workbox-webpack-plugin");
+const webpack = require("webpack");
 
 const path = require("path");
 
@@ -126,6 +127,11 @@ module.exports = function(_, arg) {
             sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
           }
         ]
+      }),
+      new webpack.DefinePlugin({
+        NAME: JSON.stringify(require("./package.json").name),
+        VERSION: JSON.stringify(require("./package.json").version),
+        BUILD_DATE: JSON.stringify(new Date())
       })
     ],
     resolve: {
