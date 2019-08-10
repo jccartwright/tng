@@ -1,5 +1,7 @@
+/* tslint:disable */
+
 const ArcGISPlugin = require("@arcgis/webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const HtmlWebpackInlineSourcePlugin = require("html-webpack-inline-source-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -15,9 +17,6 @@ module.exports = function(_, arg) {
     entry: {
       index: ["./src/css/main.scss", "./src/index.ts"]
     },
-
-    devtool: "inline-source-map",
-
     output: {
       filename: "[name].[chunkhash].js",
       publicPath: ""
@@ -27,7 +26,7 @@ module.exports = function(_, arg) {
         new TerserPlugin({
           cache: true,
           parallel: true,
-          sourceMap: true,
+          sourceMap: false,
           terserOptions: {
             output: {
               comments: false
@@ -82,7 +81,14 @@ module.exports = function(_, arg) {
     plugins: [
       new CleanWebpackPlugin(),
 
-      new ArcGISPlugin(),
+      new ArcGISPlugin({
+        features: {
+          "3d": false,
+          has: {
+            "esri-native-promise": true
+          }
+        }
+      }),
 
       new HtmlWebPackPlugin({
         title: "ArcGIS Template Application",
@@ -135,6 +141,10 @@ module.exports = function(_, arg) {
       fs: "empty"
     }
   };
+
+  if (arg.mode === "development") {
+    config.devtool = "source-map";
+  }
 
   if (arg.mode === "production") {
     config.plugins.push(
