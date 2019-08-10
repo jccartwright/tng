@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* tslint:disable:object-literal-sort-keys */
 
 const ArcGISPlugin = require("@arcgis/webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
