@@ -17,7 +17,7 @@ export const Header = (props: HeaderProperties) => (
       title="National Centers for Environmental Information, National Oceanic and Atmospheric Administration"
     >
       <img
-        src="./src/assets/map-banner.png"
+        src="./assets/map-banner.png"
         alt="National Centers for Environmental Information, National Oceanic and Atmospheric Administration"
         height="50px"
         style="vertical-align:middle; padding:3px 5px; margin-right:100px"

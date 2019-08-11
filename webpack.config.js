@@ -2,6 +2,7 @@
 
 const ArcGISPlugin = require("@arcgis/webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const HtmlWebpackInlineSourcePlugin = require("html-webpack-inline-source-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -21,7 +22,9 @@ module.exports = function(_, arg) {
     output: {
       filename: "[name].[chunkhash].js",
       publicPath: ""
+      // path: path.resolve(__dirname,'dist')
     },
+
     optimization: {
       minimizer: [
         new TerserPlugin({
@@ -77,10 +80,25 @@ module.exports = function(_, arg) {
             "sass-loader?sourceMap"
           ]
         }
+        // {
+        //   test: /\.(png|svg|jpg|gif)$/,
+        //   use: [
+        //     {
+        //     loader: 'file-loader'
+        //     }
+        //   ]
+        // }
       ]
     },
     plugins: [
       new CleanWebpackPlugin(),
+
+      new CopyWebpackPlugin([
+        {
+          from: "src/assets",
+          to: "assets"
+        }
+      ]),
 
       new ArcGISPlugin({
         features: {
@@ -149,7 +167,7 @@ module.exports = function(_, arg) {
   };
 
   if (arg.mode === "development") {
-    config.devtool = "source-map";
+    config.devtool = "eval-source-map";
   }
 
   if (arg.mode === "production") {
@@ -164,25 +182,25 @@ module.exports = function(_, arg) {
             // Match any request ends with .png, .jpg, .jpeg or .svg.
             urlPattern: /\.(?:png|jpg|jpeg|svg|gif)$/,
             // Apply a cache-first strategy.
-            handler: "cacheFirst"
+            handler: "CacheFirst"
           },
           {
             // Match any fonts
             urlPattern: /\.(?:eot|ttf|jpeg|woff|woff2)$/,
             // Apply a cache-first strategy.
-            handler: "cacheFirst"
+            handler: "CacheFirst"
           },
           {
             urlPattern: new RegExp("https://js.arcgis.com"),
-            handler: "staleWhileRevalidate"
+            handler: "StaleWhileRevalidate"
           },
           {
             urlPattern: new RegExp("https://basemaps.arcgis.com"),
-            handler: "staleWhileRevalidate"
+            handler: "StaleWhileRevalidate"
           },
           {
             urlPattern: new RegExp("https://arcgis.com/sharing"),
-            handler: "staleWhileRevalidate"
+            handler: "StaleWhileRevalidate"
           }
         ]
       })
